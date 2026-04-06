@@ -53,14 +53,12 @@ export default function MeridianExperience({ data }) {
           const period   = exp.period   || exp.duration || exp.years        || exp.startDate || "";
           const location = exp.location || "";
 
-          const bullets =
+          const rawBullets =
             Array.isArray(exp.highlights)       ? exp.highlights :
             Array.isArray(exp.responsibilities) ? exp.responsibilities :
-            Array.isArray(exp.bullets)          ? exp.bullets :
-            typeof exp.description === "string" && !exp.description ? [] :
-            [];
-
-          const description = !bullets.length ? (exp.description || "") : "";
+            Array.isArray(exp.bullets)          ? exp.bullets : [];
+          const bullets = rawBullets.filter(Boolean);
+          const description = exp.description || "";
 
           const stack =
             Array.isArray(exp.stack)        ? exp.stack :
